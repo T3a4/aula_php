@@ -27,8 +27,7 @@
   if ($pessoa->nome && $pessoa->idade) {
     if ($pessoa->criar()) {
       echo "<p class='success'>Cadastro realizado com sucesso!</p>";
-    } else {
-      echo "<p class='error'>Erro ao cadastrar.</p>";
+
     }
   }
   ?>
