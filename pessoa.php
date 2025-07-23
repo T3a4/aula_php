@@ -41,32 +41,20 @@ class Pessoa {
   }
 
   // Lê todas as pessoas cadastradas
-  public function ler() {
-    $query = "SELECT id, nome, idade FROM {$this->nome_tabela} ORDER BY nome ASC";
-    $stmt = $this->conexao->prepare($query);
-
-    try {
-      $stmt->execute();
-      return $stmt;
-    } catch (PDOException $e) {
-      error_log("Erro ao ler pessoas: " . $e->getMessage());
-      return false;
-    }
-  }
-
-  // Atualiza a idade de uma pessoa com base no ID
   public function atualizarIdade($novaIdade) {
     $novaIdade = filter_var($novaIdade, FILTER_VALIDATE_INT);
-    $this->id = filter_var($this->id, FILTER_VALIDATE_INT);
-
-    if ($novaIdade === false || $this->id === false) return false;
-
+    $idValido = filter_var($this->id, FILTER_VALIDATE_INT);
+  
+    if ($novaIdade === false || $idValido === false) return false;
+  
+    $this->id = $idValido;
+  
     $query = "UPDATE {$this->nome_tabela} SET idade = :idade WHERE id = :id";
     $stmt = $this->conexao->prepare($query);
-
+  
     $stmt->bindParam(':idade', $novaIdade, PDO::PARAM_INT);
     $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
-
+  
     try {
       return $stmt->execute();
     } catch (PDOException $e) {
@@ -76,4 +64,4 @@ class Pessoa {
   }
 }
 ?>
-
+ 

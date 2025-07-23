@@ -19,6 +19,11 @@
   $pessoa = new Pessoa($db);
   $stmtPessoas = $pessoa->ler();
   $numPessoas = $stmtPessoas->rowCount();
+  
+  $idadeValida = filter_var($this->idade, FILTER_VALIDATE_INT);
+  if ($idadeValida === false) return false;
+  $this->idade = $idadeValida;
+
 
   if ($numPessoas > 0) {
     while ($linha = $stmtPessoas->fetch(PDO::FETCH_ASSOC)) {
@@ -54,3 +59,4 @@
   ?>
 </body>
 </html>
+
