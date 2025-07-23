@@ -20,18 +20,17 @@
   $stmtPessoas = $pessoa->ler();
   $numPessoas = $stmtPessoas->rowCount();
   
-  class Pessoa {
-    public $idade;
 
-    public function setIdade($idade) {
-        $idadeValida = filter_var($idade, FILTER_VALIDATE_INT);
-        if ($idadeValida === false) {
-            return false;
-        }
-        $this->idade = $idadeValida;
-        return true;
+
+
+
+  $idadeValida = filter_var($idade, FILTER_VALIDATE_INT);
+  if ($idadeValida === false) {
+       return false;
     }
-}
+  $this->idade = $idadeValida;
+  return true;
+
 
   if ($numPessoas > 0) {
     while ($linha = $stmtPessoas->fetch(PDO::FETCH_ASSOC)) {
