@@ -1,20 +1,21 @@
-on: 
-    push:
-       branches:
-           - main
+on:
+  push:
+    branches:
+      - main
 name: 🚀 Deploy website on push
+
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🌍 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest 
-      uses: actions/checkout@v4        
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ftpupload.net
-        username: if0_39541530
-        password: Shakyra27
-        server-dir: /htdocs/
+      - name: 📦 Get latest
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftpupload.net
+          username: if0_39541530
+          password: Shakyra27
+          server-dir: /htdocs/

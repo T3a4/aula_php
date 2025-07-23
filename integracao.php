@@ -9,27 +9,24 @@
   <h1>Cadastro de Pessoas</h1>
 
   <form method="POST" action="integracao.php">
-    <input type="text" name="nome" placeholder="Nome" required>
-    <input type="number" name="idade" placeholder="Idade" required>
-    <button type="submit">Cadastrar</button>
-  </form>
+  <input type="text" name="nome" placeholder="Nome" required>
+  <input type="number" name="idade" placeholder="Idade" required>
+  <button type="submit">Cadastrar</button>
+</form>
 
-  <?php
-  require_once 'conexao.php';
-  require_once 'pessoa.php';
+<?php
+require_once 'conexao.php';
+require_once 'pessoa.php';
 
-  $db = (new BancoDeDados())->obterConexao();
-  $pessoa = new Pessoa($db);
+$db = (new BancoDeDados())->obterConexao();
+$pessoa = new Pessoa($db);
 
-  $pessoa->nome = $_POST['nome'] ?? null;
-  $pessoa->idade = $_POST['idade'] ?? null;
+$pessoa->nome = $_POST['nome'] ?? null;
+$pessoa->idade = $_POST['idade'] ?? null;
 
-  if ($pessoa->nome && $pessoa->idade) {
+if ($pessoa->nome && $pessoa->idade) {
     if ($pessoa->criar()) {
-      echo "<p class='success'>Cadastro realizado com sucesso!</p>";
-
+        echo "<p class='success'>Cadastro realizado com sucesso!</p>";
     }
-  }
-  ?>
-</body>
-</html>
+}
+?>

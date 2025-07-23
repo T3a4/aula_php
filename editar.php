@@ -7,26 +7,18 @@ $pessoa = new Pessoa($db);
 
 // Verifica se ID foi enviado
 $id = $_GET['id'] ?? null;
+$novaIdade = $_POST['idade'] ?? null;
 
-if (!$id) {
-  echo "<p class='error'>ID inválido.</p>";
-  exit;
-}
+if ($id) {
+    $pessoa->id = $id;
 
-// Atribui o ID à instância
-$pessoa->id = $id;
-
-// Verifica se o formulário foi enviado
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $novaIdade = $_POST['idade'] ?? null;
-
-  if ($novaIdade !== null && is_numeric($novaIdade)) {
-    if ($pessoa->atualizarIdade($novaIdade)) {
-      echo "<p class='success'>Idade atualizada com sucesso!</p>";
-    } else {
-      echo "<p class='error'>Erro ao atualizar idade.</p>";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($novaIdade)) {
+        if ($pessoa->atualizarIdade($novaIdade)) {
+            echo "<p class='success'>Idade atualizada com sucesso!</p>";
+        } else {
+            echo "<p class='error'>Erro ao atualizar idade.</p>";
+        }
     }
-  }
 }
 ?>
 
