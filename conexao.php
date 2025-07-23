@@ -1,6 +1,6 @@
 <?php
 class BancoDeDados {
-  private $hostname = "sql205.infinityfree.com";
+  private $hostname = "ftpupload.net";
   private $nome_banco = "aula_php";
   private $usuario = "if0_39541530";
   private $senha = "Shakyra27";
@@ -9,7 +9,7 @@ class BancoDeDados {
   public function obterConexao() {
     $this->conexao = null;
     try {
-      $dsn = "mysql:host={$this->host};dbname={$this->nome_banco};charset=utf8";
+      $mysqli = new mysqli($hostname, $usuario, $senha, $bancodedados);
       
       $this->conexao = new PDO(
         $dsn,
