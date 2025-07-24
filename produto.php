@@ -44,6 +44,17 @@ class Produto {
         $stmt->bindValue(':preco', $this->preco);
         $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $stmt->execute();
+
+        public function excluir() {
+            $query = "DELETE FROM " . $this->nome_tabela . " WHERE id = :id";
+            $stmt = $this->conexao->prepare($query);
+    
+            $this->id = htmlsspecialchars(strip_tags($this->id));
+    
+            $stmt->bindParam(':id', $this->id);
+    
+            return $stmt->execute();
+        }
     }
 }
 ?>

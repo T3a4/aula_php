@@ -48,6 +48,16 @@ class Pessoa {
         return $stmt->execute();
     }
 
+    public function excluir() {
+        $query = "DELETE FROM " . $this->nome_tabela . " WHERE id = :id";
+        $stmt = $this->conexao->prepare($query);
+
+        $this->id = htmlsspecialchars(strip_tags($this->id));
+
+        $stmt->bindParam(':id', $this->id);
+
+        return $stmt->execute();
+    }
     // Você pode adicionar outros métodos conforme precisar, como deletar, buscar por id, etc.
 }
 ?>
