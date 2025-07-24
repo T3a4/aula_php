@@ -45,19 +45,10 @@ if ($id && is_numeric($id)) {
   <meta charset="UTF-8">
   <title>Editar Idade</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .success { color: green; }
-    .error { color: red; }
-    form { margin-top: 20px; }
-    label { display: block; margin-bottom: 8px; }
-    input[type="number"] { padding: 5px; }
-    button { padding: 6px 12px; }
-    .btn { display: inline-block; padding: 6px 12px; background: #ccc; text-decoration: none; }
-  </style>
+  <body>
+    <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
 </head>
-<body>
-  <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
+</body>
 
   <?= $mensagem ?>
 
@@ -73,9 +64,11 @@ if ($id && is_numeric($id)) {
   <?php endif; ?>
 
   <div style="margin-top: 20px;">
-    <a href="listar.php" class="btn">Voltar</a>
+    <a href="listar.php" class="btn">Atualizar</a>
   </div>
 </body>
 </html>
+
+
 
 
