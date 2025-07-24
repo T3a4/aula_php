@@ -27,10 +27,9 @@ class Pessoa {
 
     // Ler todas as pessoas ordenadas por nome
     public function ler() {
-        $query = "SELECT id, nome, idade FROM {$this->nome_tabela} ORDER BY nome ASC";
-        $stmt = $this->conexao->prepare($query);
+        $stmt = $this->conn->prepare("SELECT * FROM pessoas");
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Atualizar idade de uma pessoa pelo id

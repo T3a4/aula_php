@@ -2,40 +2,46 @@
 require_once 'conexao.php';
 require_once 'pessoa.php';
 
-$db = (new BancoDeDados())->obterConexao();
-$pessoa = new Pessoa($db);
-
-$id = $_GET['id'] ?? null;
 $mensagem = '';
 $dados = null;
+$id = $_GET['id'] ?? null;
 
-if ($id && is_numeric($id)) {
-    $pessoa->id = $id;
+try {
+    $db = (new BancoDeDados())->obterConexao();
+    $pessoa = new Pessoa($db);
 
-    // Buscar dados da pessoa
-    $stmt = $db->prepare("SELECT nome, idade FROM pessoas WHERE id = ?");
-    $stmt->execute([$id]);
-    $dados = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($id && is_numeric($id)) {
+        $pessoa->id = $id;
 
-    if (!$dados) {
-        $mensagem = "<p class='error'>Pessoa não encontrada.</p>";
-        $id = null; // Evita mostrar formulário
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $novaIdade = $_POST['idade'] ?? null;
+        // Buscar dados da pessoa
+        $stmt = $db->prepare("SELECT nome, idade FROM pessoas WHERE id = ?");
+        $stmt->execute([$id]);
+        $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (is_numeric($novaIdade)) {
-            if ($pessoa->atualizarIdade($novaIdade)) {
-                $mensagem = "<p class='success'>Idade atualizada com sucesso!</p>";
-                $dados['idade'] = $novaIdade; // Atualiza localmente para exibição
+        if (!$dados) {
+            $mensagem = "<p class='error'>Pessoa não encontrada com ID {$id}.</p>";
+            $id = null; // Evita mostrar o formulário
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $novaIdade = $_POST['idade'] ?? null;
+
+            if (is_numeric($novaIdade)) {
+                if ($pessoa->atualizarIdade($novaIdade)) {
+                    $mensagem = "<p class='success'>Idade atualizada com sucesso!</p>";
+                    $dados['idade'] = $novaIdade; // Atualiza para exibir
+                } else {
+                    $mensagem = "<p class='error'>Erro ao atualizar idade.</p>";
+                }
             } else {
-                $mensagem = "<p class='error'>Erro ao atualizar idade.</p>";
+                $mensagem = "<p class='error'>Idade inválida. Informe um número.</p>";
             }
-        } else {
-            $mensagem = "<p class='error'>Idade inválida.</p>";
         }
+    } else {
+        $mensagem = "<p class='error'>ID inválido ou não informado.</p>";
     }
-} else {
-    $mensagem = "<p class='error'>ID inválido ou não informado.</p>";
+
+} catch (PDOException $e) {
+    $mensagem = "<p class='error'>Erro de conexão: " . htmlspecialchars($e->getMessage()) . "</p>";
+    $id = null; // Evita continuar a execução
 }
 ?>
 
@@ -48,10 +54,10 @@ if ($id && is_numeric($id)) {
 </head>
 <body>
   <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
-  
+
   <?= $mensagem ?>
 
-  <?php if ($id && is_numeric($id) && $dados): ?>
+  <?php if ($id && $dados): ?>
     <p><strong>Nome:</strong> <?= htmlspecialchars($dados['nome']) ?></p>
     <p><strong>Idade atual:</strong> <?= htmlspecialchars($dados['idade']) ?></p>
 
@@ -67,6 +73,7 @@ if ($id && is_numeric($id)) {
   </div>
 </body>
 </html>
+
 
 
 
