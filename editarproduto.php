@@ -14,7 +14,7 @@ try {
         $produto->id = $id;
 
         // Buscar dados da produto
-        $stmt = $db->prepare("SELECT nome, preco FROM produto WHERE id = ?");
+        $stmt = $db->prepare("SELECT nome, preco FROM produtos WHERE id = ?");
         $stmt->execute([$id]);
         $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -24,8 +24,8 @@ try {
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $novoPreco = $_POST['preco'] ?? null;
 
-            if (is_numeric($novaIdade)) {
-                if ($produto->atualizarIdade($novoPreco)) {
+            if (is_numeric($novoPreco)) {
+                if ($produto->atualizarPreco($novoPreco)) {
                     $mensagem = "<p class='success'>Produto atualizado com sucesso!</p>";
                     $dados['preco'] = $novoPreco; // Atualiza para exibir
                 } else {
@@ -58,7 +58,7 @@ try {
   <?= $mensagem ?>
 
   <?php if ($id && $dados): ?>
-    <p><strong>Nome do produto:</strong> <?= htmlspecialchars($dados['nome do produto']) ?></p>
+    <p><strong>Nome:</strong> <?= htmlspecialchars($dados['nome']) ?></p>
     <p><strong>Preço Atual:</strong> R$ <?= htmlspecialchars($dados['preco']) ?></p>
 
     <form method="POST">
