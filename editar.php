@@ -61,13 +61,17 @@ try {
   <?php if ($id && $dados): ?>
     <p><strong>Nome:</strong> <?= htmlspecialchars($dados['nome']) ?></p>
     <p><strong>Idade atual:</strong> <?= htmlspecialchars($dados['idade']) ?></p>
-    <p><strong>Nome do preço:</strong> <?= htmlspecialchars($dados['nome do preco']) ?></p>
+    <p><strong>Nome do produto:</strong> <?= htmlspecialchars($dados['nome do produto']) ?></p>
     <p><strong>Preço Atual:</strong> R$ <?= htmlspecialchars($dados['preco']) ?></p>
 
     <form method="POST">
       <label for="idade">Novo Preço:</label>
       <input type="number" name="idade" id="idade" required>
       <button type="submit">Atualizar</button>
+      </form>
+      <?php endif; ?>
+
+    <form method="POST">
       <label for="preco">Novo Preço:</label>
       <input type="number" step="0.01" name="preco" id="preco" required>
       <button type="submit">Atualizar</button>
@@ -76,6 +80,9 @@ try {
 
   <div style="margin-top: 20px;">
     <a href="listar.php" class="btn">Atualizar</a>
+  </div> 
+
+  <div style="margin-top: 20px;">
     <a href="listar.php" class="btn">Atualizar</a>
   </div>
 </body>
