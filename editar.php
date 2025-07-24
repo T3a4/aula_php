@@ -1,6 +1,7 @@
 <?php
 require_once 'conexao.php';
 require_once 'pessoa.php';
+require_once 'produto.php';
 
 $mensagem = '';
 $dados = null;
@@ -53,22 +54,28 @@ try {
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
+  <h1>Editar Idade da Pessoa ID e Editar Preço do Produto ID<?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
 
   <?= $mensagem ?>
 
   <?php if ($id && $dados): ?>
     <p><strong>Nome:</strong> <?= htmlspecialchars($dados['nome']) ?></p>
     <p><strong>Idade atual:</strong> <?= htmlspecialchars($dados['idade']) ?></p>
+    <p><strong>Nome do preço:</strong> <?= htmlspecialchars($dados['nome do preco']) ?></p>
+    <p><strong>Preço Atual:</strong> R$ <?= htmlspecialchars($dados['preco']) ?></p>
 
     <form method="POST">
       <label for="idade">Novo Preço:</label>
       <input type="number" name="idade" id="idade" required>
       <button type="submit">Atualizar</button>
+      <label for="preco">Novo Preço:</label>
+      <input type="number" step="0.01" name="preco" id="preco" required>
+      <button type="submit">Atualizar</button>
     </form>
   <?php endif; ?>
 
   <div style="margin-top: 20px;">
+    <a href="listar.php" class="btn">Atualizar</a>
     <a href="listar.php" class="btn">Atualizar</a>
   </div>
 </body>
