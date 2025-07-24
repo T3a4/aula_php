@@ -19,26 +19,14 @@
   $pessoa = new Pessoa($db);
   $stmtPessoas = $pessoa->ler();
   $numPessoas = $stmtPessoas->rowCount();
-  
-
-
-
-
-  $idadeValida = filter_var($idade, FILTER_VALIDATE_INT);
-  if ($idadeValida === false) {
-       return false;
-    }
-  $this->idade = $idadeValida;
-  return true;
-
 
   if ($numPessoas > 0) {
     while ($linha = $stmtPessoas->fetch(PDO::FETCH_ASSOC)) {
       echo "<div class='card'>";
-      echo "<p><strong>ID:</strong> {$linha['id']}</p>";
-      echo "<p><strong>Nome:</strong> {$linha['nome']}</p>";
-      echo "<p><strong>Idade:</strong> {$linha['idade']}</p>";
-      echo "<a href='editar.php?id={$linha['id']}' class='btn'>Editar Idade</a>";
+      echo "<p><strong>ID:</strong> " . htmlspecialchars($linha['id']) . "</p>";
+      echo "<p><strong>Nome:</strong> " . htmlspecialchars($linha['nome']) . "</p>";
+      echo "<p><strong>Idade:</strong> " . htmlspecialchars($linha['idade']) . "</p>";
+      echo "<a href='editar.php?id=" . urlencode($linha['id']) . "' class='btn'>Editar Idade</a>";
       echo "</div>";
     }
   } else {
@@ -55,8 +43,8 @@
   if ($numProdutos > 0) {
     while ($linha = $stmtProdutos->fetch(PDO::FETCH_ASSOC)) {
       echo "<div class='card'>";
-      echo "<p><strong>ID:</strong> {$linha['id']}</p>";
-      echo "<p><strong>Nome:</strong> {$linha['nome']}</p>";
+      echo "<p><strong>ID:</strong> " . htmlspecialchars($linha['id']) . "</p>";
+      echo "<p><strong>Nome:</strong> " . htmlspecialchars($linha['nome']) . "</p>";
       echo "<p><strong>Preço:</strong> R$ " . number_format($linha['preco'], 2, ',', '.') . "</p>";
       echo "</div>";
     }
