@@ -9,7 +9,7 @@ class BancoDeDados {
     public function obterConexao() {
         $this->conexao = null;
         try {
-            $dsn = "mysql:host={$this->hostname};dbname={$this->nome_banco};charset=utf8";
+            $dsn = "mysql:host={$this->hostname}; port=49170; dbname={$this->nome_banco};charset=utf8";
             $this->conexao = new PDO($dsn, $this->usuario, $this->senha);
             $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
