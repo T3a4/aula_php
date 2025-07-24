@@ -8,31 +8,31 @@ $id = $_GET['id'] ?? null;
 
 try {
     $db = (new BancoDeDados())->obterConexao();
-    $pessoa = new Pessoa($db);
+    $produto = new Produto($db);
 
     if ($id && is_numeric($id)) {
-        $pessoa->id = $id;
+        $produto->id = $id;
 
-        // Buscar dados da pessoa
-        $stmt = $db->prepare("SELECT nome, idade FROM pessoas WHERE id = ?");
+        // Buscar dados da produto
+        $stmt = $db->prepare("SELECT nome, preco FROM produto WHERE id = ?");
         $stmt->execute([$id]);
         $dados = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$dados) {
-            $mensagem = "<p class='error'>Pessoa não encontrada com ID {$id}.</p>";
+            $mensagem = "<p class='error'>Produto não encontrado com ID {$id}.</p>";
             $id = null; // Evita mostrar o formulário
         } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $novaIdade = $_POST['idade'] ?? null;
+            $novoPreco = $_POST['preco'] ?? null;
 
             if (is_numeric($novaIdade)) {
-                if ($pessoa->atualizarIdade($novaIdade)) {
-                    $mensagem = "<p class='success'>Idade atualizada com sucesso!</p>";
-                    $dados['idade'] = $novaIdade; // Atualiza para exibir
+                if ($produto->atualizarIdade($novoPreco)) {
+                    $mensagem = "<p class='success'>Produto atualizado com sucesso!</p>";
+                    $dados['preco'] = $novoPreco; // Atualiza para exibir
                 } else {
-                    $mensagem = "<p class='error'>Erro ao atualizar idade.</p>";
+                    $mensagem = "<p class='error'>Erro ao atualizar preco.</p>";
                 }
             } else {
-                $mensagem = "<p class='error'>Idade inválida. Informe um número.</p>";
+                $mensagem = "<p class='error'>Preco inválido. Informe um número.</p>";
             }
         }
     } else {
@@ -73,6 +73,13 @@ try {
   </div>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 

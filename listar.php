@@ -46,7 +46,7 @@
       echo "<p><strong>ID:</strong> " . htmlspecialchars($linha['id']) . "</p>";
       echo "<p><strong>Nome:</strong> " . htmlspecialchars($linha['nome']) . "</p>";
       echo "<p><strong>Preço:</strong> R$ " . number_format($linha['preco'], 2, ',', '.') . "</p>";
-      echo "<a href='editar.php?id=" . urlencode($linha['id']) . "' class='btn'>Editar Preco</a>";
+      echo "<a href='editarproduto.php?id=" . urlencode($linha['id']) . "' class='btn'>Editar Preco</a>";
       echo "</div>";
     }
   } else {
