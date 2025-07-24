@@ -1,6 +1,5 @@
 <?php
 require_once 'conexao.php';
-require_once 'pessoa.php';
 require_once 'produto.php';
 
 $mensagem = '';
@@ -50,7 +49,7 @@ try {
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Editar Idade</title>
+  <title>Editar Produto</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
