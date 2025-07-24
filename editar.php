@@ -45,11 +45,10 @@ if ($id && is_numeric($id)) {
   <meta charset="UTF-8">
   <title>Editar Idade</title>
   <link rel="stylesheet" href="style.css">
-  <body>
-    <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
 </head>
-</body>
-
+<body>
+  <h1>Editar Idade da Pessoa ID <?= htmlspecialchars($id ?? 'Desconhecido') ?></h1>
+  
   <?= $mensagem ?>
 
   <?php if ($id && is_numeric($id) && $dados): ?>
@@ -68,6 +67,7 @@ if ($id && is_numeric($id)) {
   </div>
 </body>
 </html>
+
 
 
 
