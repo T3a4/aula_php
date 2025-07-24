@@ -1,7 +1,6 @@
 <?php
 require_once 'conexao.php';
 require_once 'pessoa.php';
-require_once 'produto.php';
 
 $mensagem = '';
 $dados = null;
@@ -80,13 +79,15 @@ try {
 
   <div style="margin-top: 20px;">
     <a href="listar.php" class="btn">Atualizar</a>
-  </div> 
 
-  <div style="margin-top: 20px;">
+  <div style="margin-top: 20px;"> 
     <a href="listar.php" class="btn">Atualizar</a>
   </div>
 </body>
 </html>
+
+
+
 
 
 
