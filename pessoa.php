@@ -1,35 +1,27 @@
 <?php
+// (sua classe Pessoa continua aqui...)
+
 class Pessoa {
-  private $conexao;
-  private $nome_tabela = "pessoas";
-  public $id, $nome, $idade;
-
-  public function __construct($db) {
-      $this->conexao = $db;
-  }
-
-  public function criar() {
-      $query = "INSERT INTO {$this->nome_tabela} (nome, idade) VALUES (:nome, :idade)";
-      $stmt = $this->conexao->prepare($query);
-      $this->nome = htmlspecialchars(strip_tags($this->nome));
-      $this->idade = filter_var($this->idade, FILTER_VALIDATE_INT);
-      if ($this->idade === false) return false;
-      $stmt->bindParam(':nome', $this->nome);
-      $stmt->bindParam(':idade', $this->idade, PDO::PARAM_INT);
-      return $stmt->execute();
-  }
-
-  public function ler() {
-      return $this->conexao->query("SELECT * FROM {$this->nome_tabela}");
-  }
-
-  public function atualizarIdade($novaIdade) {
-      $query = "UPDATE {$this->nome_tabela} SET idade = :idade WHERE id = :id";
-      $stmt = $this->conexao->prepare($query);
-      $novaIdade = filter_var($novaIdade, FILTER_VALIDATE_INT);
-      if ($novaIdade === false) return false;
-      $stmt->bindParam(':idade', $novaIdade, PDO::PARAM_INT);
-      $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
-      return $stmt->execute();
-  }
+    // ... seu código aqui ...
 }
+
+// TESTE DE EXIBIÇÃO
+// Arquivo de conexão (você deve criar ou ajustar conforme seu ambiente)
+$dsn = "mysql:host=localhost;dbname=seu_banco_de_dados;charset=utf8";
+$usuario = "root";
+$senha = "";
+
+try {
+    $conexao = new PDO($dsn, $usuario, $senha);
+    $pessoa = new Pessoa($conexao);
+
+    // Exibir todas as pessoas
+    $stmt = $pessoa->ler();
+    foreach ($stmt as $linha) {
+        echo "ID: {$linha['id']} - Nome: {$linha['nome']} - Idade: {$linha['idade']}<br>";
+    }
+
+} catch (PDOException $e) {
+    echo "Erro de conexão: " . $e->getMessage();
+}
+?>
