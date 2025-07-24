@@ -62,7 +62,7 @@ try {
     <p><strong>Idade atual:</strong> <?= htmlspecialchars($dados['idade']) ?></p>
 
     <form method="POST">
-      <label for="idade">Nova Idade:</label>
+      <label for="idade">Novo Preço:</label>
       <input type="number" name="idade" id="idade" required>
       <button type="submit">Atualizar</button>
     </form>
@@ -73,6 +73,9 @@ try {
   </div>
 </body>
 </html>
+
+
+
 
 
 

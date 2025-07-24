@@ -55,7 +55,7 @@ try {
     <?= $mensagem ?>
 
     <?php if ($id && $dados): ?>
-        <p><strong>Nome:</strong> <?= htmlspecialchars($dados['nome']) ?></p>
+        <p><strong>Nome do preço:</strong> <?= htmlspecialchars($dados['nome do preco']) ?></p>
         <p><strong>Preço Atual:</strong> R$ <?= htmlspecialchars($dados['preco']) ?></p>
 
         <form method="POST">
