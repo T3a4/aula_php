@@ -52,7 +52,7 @@ class Pessoa {
         $query = "DELETE FROM " . $this->nome_tabela . " WHERE id = :id";
         $stmt = $this->conexao->prepare($query);
 
-        $this->id = htmlsspecialchars(strip_tags($this->id));
+        $this->id = htmlspecialchars(strip_tags($this->id)); // Corrigido "htmlsspecialchars"
 
         $stmt->bindParam(':id', $this->id);
 
@@ -61,3 +61,5 @@ class Pessoa {
     // Você pode adicionar outros métodos conforme precisar, como deletar, buscar por id, etc.
 }
 ?>
+
+
