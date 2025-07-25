@@ -53,7 +53,7 @@
       echo "<p><strong>Nome:</strong> " . htmlspecialchars($linha['nome']) . "</p>";
       echo "<p><strong>Preço:</strong> R$ " . number_format($linha['preco'], 2, ',', '.') . "</p>";
       echo "<a href='editarproduto.php?id=" . urlencode($linha['id']) . "' class='btn'>Editar Preco</a>";
-      
+
       echo "<form method='POST' action='excluir_produto.php' onsubmit=\"return confirm('Tem certeza que deseja excluir este produto?');\" style='display:inline-block; margin-left:10px;'>";
       echo "<input type='hidden' name='id' value='" . htmlspecialchars($linha['id']) . "'>";
       echo "<button type='submit' class='btn btn-danger'>Excluir</button>";

@@ -1,20 +1,20 @@
 <?php
 include_once 'conexao.php';
-include_once 'pessoa.php';
+include_once 'produto.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     $banco = new BancoDeDados();
     $conexao = $banco->obterConexao();
 
     if ($conexao) {
-        $pessoa = new Pessoa($conexao);
-        $pessoa->id = $_POST['id'];
+        $produto = new Produto($conexao);
+        $produto->id = $_POST['id'];
 
-        if ($pessoa->excluir()) {
-            header('Location: listagem_pessoas.php?msg=Pessoa excluída com sucesso');
+        if ($produto->excluir()) {
+            header('Location: listagem_produtos.php?msg=Produto excluído com sucesso');
             exit;
         } else {
-            echo "Erro ao excluir a pessoa.";
+            echo "Erro ao excluir o produto.";
         }
     } else {
         echo "Erro ao conectar ao banco de dados.";
